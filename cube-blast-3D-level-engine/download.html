@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download — Cube Blast 3D Level Engine</title>
+    <!--
+      The download page.
+
+      A plain static page rather than part of the app, for two reasons. It has to work for someone
+      who has never opened the tool, and it has to load when the app itself is what they are missing.
+
+      THE SMARTSCREEN WARNING IS DOCUMENTED, NOT HIDDEN. The installer is unsigned, so Windows shows
+      "Windows protected your PC" and puts Run anyway behind a More info link that does not look like
+      a link. Someone who has not been told what to expect reads that as "this is malware" and stops,
+      which is the correct instinct and the wrong outcome here. Saying it in advance, in the same
+      words Windows uses, is what makes it a step rather than a wall.
+    -->
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0; padding: 40px 16px;
+        background: #171c26; color: #e8eaed;
+        font: 15px/1.65 ui-sans-serif, system-ui, -apple-system, sans-serif;
+        display: flex; justify-content: center;
+      }
+      main { max-width: 640px; width: 100%; }
+      h1 { font-size: 24px; margin: 0 0 4px; letter-spacing: -0.01em; }
+      h2 { font-size: 15px; margin: 28px 0 8px; }
+      p { margin: 0 0 12px; color: #c3c8d0; }
+      .sub { color: #9aa4b2; margin-bottom: 28px; }
+      .dl {
+        display: inline-block; background: #5dd7ff; color: #0b1017;
+        padding: 12px 22px; border-radius: 8px; font-weight: 600;
+        text-decoration: none;
+      }
+      .dl:hover { background: #8ae3ff; }
+      .meta { color: #9aa4b2; font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; margin-top: 8px; }
+      .warn {
+        border: 1px solid rgba(245, 183, 46, 0.4); background: rgba(245, 183, 46, 0.1);
+        border-radius: 8px; padding: 12px 14px; margin: 20px 0;
+      }
+      .warn strong { color: #f5b72e; }
+      ol, ul { color: #c3c8d0; padding-left: 20px; margin: 0 0 12px; }
+      li { margin: 4px 0; }
+      code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; color: #9bffcd; }
+      a { color: #5dd7ff; }
+      hr { border: 0; border-top: 1px solid #2a3140; margin: 28px 0; }
+      .quiet { color: #9aa4b2; font-size: 13px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Cube Blast 3D Level Engine</h1>
+      <p class="sub">Level configs, boards, shooter queues and the Unity import, in one app.</p>
+
+      <a class="dl" href="https://github.com/Niichan1403/mikaykun/releases/latest/download/CubeBlast-LevelEngine-Setup.exe">
+        Download for Windows
+      </a>
+      <div class="meta">
+        Windows 10 or 11, 64-bit &middot; installs for your user only, no administrator rights needed
+      </div>
+
+      <div class="warn">
+        <p><strong>Windows will warn you, and that is expected.</strong></p>
+        <p>
+          The installer is not code-signed, so Windows shows a blue box saying
+          <em>&ldquo;Windows protected your PC&rdquo;</em>. It is not a virus warning &mdash; it means
+          Windows has not seen this file from a paid certificate before.
+        </p>
+        <ol>
+          <li>Click <strong>More info</strong> (small text, easy to miss)</li>
+          <li>Click <strong>Run anyway</strong></li>
+        </ol>
+        <p class="quiet">
+          Your browser may also warn on the download itself. Choose Keep.
+        </p>
+      </div>
+
+      <h2>After it installs</h2>
+      <ol>
+        <li>Open <strong>Settings</strong> and connect to the team database, if it is not already.</li>
+        <li>Sign in with your work email. A link arrives by email; click it.</li>
+        <li>
+          Wait to be approved. Signing in is a <em>request</em> &mdash; a new account sees nothing
+          until an admin approves it. Ask whoever runs the tool.
+        </li>
+        <li>
+          Once approved, the colour atlas and palette download automatically and everything works.
+        </li>
+      </ol>
+
+      <h2>For the Unity import</h2>
+      <p>The Import tab needs two paths that are different on every machine:</p>
+      <ul>
+        <li>the <strong>Unity editor</strong> (<code>Unity.exe</code>)</li>
+        <li>the <strong>game project</strong> folder</li>
+      </ul>
+      <p>
+        Set them once in the Import tab; they are remembered. <strong>Close Unity before importing</strong>
+        &mdash; a running editor holds a lock that blocks batch mode for up to thirty minutes.
+      </p>
+
+      <h2>Updates</h2>
+      <p>The app checks for a new version on start and offers it. You do not need this page again.</p>
+
+      <hr />
+      <p class="quiet">
+        Only need to look at a board, not build one?
+        <a href="./">Open the viewer in your browser</a> &mdash; no install, no sign-in, and no
+        generating or saving.
+      </p>
+    </main>
+  </body>
+</html>
