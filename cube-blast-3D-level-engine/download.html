@@ -7,14 +7,18 @@
     <!--
       The download page.
 
-      A plain static page rather than part of the app, for two reasons. It has to work for someone
-      who has never opened the tool, and it has to load when the app itself is what they are missing.
+      A plain static page rather than part of the app: it has to work for someone who has never
+      opened the tool, and it has to load when the app is the thing they are missing.
+
+      IT NAMES THE VERSION, because the installer filename now carries one and "which build are you
+      on" is the first question in every report. The version and the direct link are read from the
+      GitHub release at load time, so this file never goes stale; if that request fails, the button
+      still points at the releases page, which always resolves to the newest.
 
       THE SMARTSCREEN WARNING IS DOCUMENTED, NOT HIDDEN. The installer is unsigned, so Windows shows
-      "Windows protected your PC" and puts Run anyway behind a More info link that does not look like
-      a link. Someone who has not been told what to expect reads that as "this is malware" and stops,
-      which is the correct instinct and the wrong outcome here. Saying it in advance, in the same
-      words Windows uses, is what makes it a step rather than a wall.
+      "Windows protected your PC" with Run anyway behind a More info link that does not look like a
+      link. Someone who has not been told reads that as malware and stops - the right instinct, the
+      wrong outcome here.
     -->
     <style>
       :root { color-scheme: dark; }
@@ -25,10 +29,9 @@
         display: flex; justify-content: center;
       }
       main { max-width: 640px; width: 100%; }
-      h1 { font-size: 24px; margin: 0 0 4px; letter-spacing: -0.01em; }
+      h1 { font-size: 24px; margin: 0 0 16px; letter-spacing: -0.01em; }
       h2 { font-size: 15px; margin: 28px 0 8px; }
       p { margin: 0 0 12px; color: #c3c8d0; }
-      .sub { color: #9aa4b2; margin-bottom: 28px; }
       .dl {
         display: inline-block; background: #5dd7ff; color: #0b1017;
         padding: 12px 22px; border-radius: 8px; font-weight: 600;
@@ -47,69 +50,110 @@
       a { color: #5dd7ff; }
       hr { border: 0; border-top: 1px solid #2a3140; margin: 28px 0; }
       .quiet { color: #9aa4b2; font-size: 13px; }
+      table { border-collapse: collapse; margin: 0 0 12px; }
+      td { padding: 2px 16px 2px 0; color: #c3c8d0; font-size: 14px; }
+      td.k { color: #9aa4b2; }
     </style>
   </head>
   <body>
     <main>
       <h1>Cube Blast 3D Level Engine</h1>
-      <p class="sub">Level configs, boards, shooter queues and the Unity import, in one app.</p>
 
-      <a class="dl" href="https://github.com/Niichan1403/mikaykun/releases/latest/download/CubeBlast-LevelEngine-Setup.exe">
+      <a class="dl" id="dl"
+         href="https://github.com/Niichan1403/mikaykun/releases/latest">
         Download for Windows
       </a>
-      <div class="meta">
-        Windows 10 or 11, 64-bit &middot; installs for your user only, no administrator rights needed
-      </div>
+      <div class="meta" id="meta">Windows 10 or 11, 64-bit · per-user install, no admin rights</div>
+
+      <h2>Version</h2>
+      <table>
+        <tr><td class="k">latest</td><td id="v-version">checking…</td></tr>
+        <tr><td class="k">file</td><td id="v-file">—</td></tr>
+        <tr><td class="k">published</td><td id="v-date">—</td></tr>
+        <tr><td class="k">size</td><td id="v-size">—</td></tr>
+      </table>
+      <p class="quiet">
+        The app shows its own version in the header and on the sign-in screen. Everyone working on
+        one collection should be on the same one.
+        <a href="https://github.com/Niichan1403/mikaykun/releases">All versions</a>
+      </p>
 
       <div class="warn">
-        <p><strong>Windows will warn you, and that is expected.</strong></p>
-        <p>
-          The installer is not code-signed, so Windows shows a blue box saying
-          <em>&ldquo;Windows protected your PC&rdquo;</em>. It is not a virus warning &mdash; it means
-          Windows has not seen this file from a paid certificate before.
-        </p>
+        <p><strong>Windows will warn you. That is expected.</strong></p>
+        <p>The installer is unsigned, so Windows shows <em>“Windows protected your PC”</em>.</p>
         <ol>
-          <li>Click <strong>More info</strong> (small text, easy to miss)</li>
+          <li>Click <strong>More info</strong></li>
           <li>Click <strong>Run anyway</strong></li>
         </ol>
-        <p class="quiet">
-          Your browser may also warn on the download itself. Choose Keep.
-        </p>
+        <p class="quiet">Your browser may warn on the download too. Choose Keep.</p>
       </div>
 
-      <h2>After it installs</h2>
+      <h2>First run</h2>
       <ol>
-        <li>Open <strong>Settings</strong> and connect to the team database, if it is not already.</li>
-        <li>Sign in with your work email. A link arrives by email; click it.</li>
+        <li>Open the app and click <strong>Sign in with Google</strong>. It opens your browser.</li>
+        <li>Pick your work account. The browser says to come back; the app is signed in.</li>
         <li>
-          Wait to be approved. Signing in is a <em>request</em> &mdash; a new account sees nothing
-          until an admin approves it. Ask whoever runs the tool.
-        </li>
-        <li>
-          Once approved, the colour atlas and palette download automatically and everything works.
+          If it says the address is not on the list, ask an admin to add it, then sign in again.
         </li>
       </ol>
 
       <h2>For the Unity import</h2>
-      <p>The Import tab needs two paths that are different on every machine:</p>
+      <p>The Import tab needs two paths that differ per machine:</p>
       <ul>
         <li>the <strong>Unity editor</strong> (<code>Unity.exe</code>)</li>
         <li>the <strong>game project</strong> folder</li>
       </ul>
       <p>
-        Set them once in the Import tab; they are remembered. <strong>Close Unity before importing</strong>
-        &mdash; a running editor holds a lock that blocks batch mode for up to thirty minutes.
+        Set them once; they are remembered. <strong>Close Unity before importing</strong> — a running
+        editor holds a lock that blocks batch mode for up to thirty minutes.
       </p>
 
       <h2>Updates</h2>
-      <p>The app checks for a new version on start and offers it. You do not need this page again.</p>
+      <p>
+        The app checks on start and offers the new version. Settings → This app checks on demand and
+        installs.
+      </p>
 
       <hr />
       <p class="quiet">
-        Only need to look at a board, not build one?
-        <a href="./">Open the viewer in your browser</a> &mdash; no install, no sign-in, and no
-        generating or saving.
+        Only need to look at a board?
+        <a href="./">Open the viewer in your browser</a> — no install, no sign-in, no saving.
       </p>
     </main>
+
+    <script>
+      /*
+       * Name the newest release, and point the button straight at its file.
+       *
+       * The installer filename carries the version now, so a fixed /latest/download/<name> URL would
+       * break on every release. The button starts as a link to the releases page - correct with no
+       * JavaScript at all - and is upgraded here to the exact asset.
+       */
+      (async () => {
+        const set = (id, text) => { document.getElementById(id).textContent = text; };
+        try {
+          const res = await fetch(
+            'https://api.github.com/repos/Niichan1403/mikaykun/releases/latest',
+            { headers: { Accept: 'application/vnd.github+json' } },
+          );
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          const rel = await res.json();
+          const exe = (rel.assets || []).find((a) => a.name.endsWith('.exe'));
+
+          set('v-version', rel.tag_name || rel.name || '—');
+          set('v-date', rel.published_at ? new Date(rel.published_at).toLocaleDateString() : '—');
+          if (exe) {
+            set('v-file', exe.name);
+            set('v-size', (exe.size / 1048576).toFixed(0) + ' MB');
+            const dl = document.getElementById('dl');
+            dl.href = exe.browser_download_url;
+            dl.textContent = 'Download ' + (rel.tag_name || '') + ' for Windows';
+          }
+        } catch {
+          // Offline, rate-limited, or GitHub is down. The button still goes somewhere correct.
+          set('v-version', 'see the releases page');
+        }
+      })();
+    </script>
   </body>
 </html>
